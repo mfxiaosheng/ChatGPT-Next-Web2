@@ -212,7 +212,18 @@ export function Settings() {
 
   function checkUpdate(force = false) {
     setCheckingUpdate(true);
-    
+    updateStore.getLatestVersion(force).then(() => {
+      setCheckingUpdate(false);
+    });
+
+    console.log(
+      "[Update] local version ",
+      new Date(+updateStore.version).toLocaleString(),
+    );
+    console.log(
+      "[Update] remote version ",
+      new Date(+updateStore.remoteVersion).toLocaleString(),
+    );
   }
 
   const usage = {
